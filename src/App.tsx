@@ -12,6 +12,7 @@ import Features from "./components/features";
 import HowItWorks from "./components/howitworks";
 import { Footer } from "./components/footer";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -68,7 +69,7 @@ function App() {
               />
             }
           />
-          <Route path="/signup" element={<Signup />} />
+
           <Route path="/" element={<Homecontent />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<SignIn />} />
