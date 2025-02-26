@@ -105,17 +105,20 @@ export const CreateContentModal = ({ open, onClose }: any) => {
   return (
     <>
       {open && (
-           <div className="h-screen font-apple w-screen top-0 left-0  bg-opacity-50 fixed bg-slate-500  flex justify-center items-center">
-           <span className=" h-custom-h w-custom-h bg-white opacity-100 p-4 rounded-md">
-             <div onClick={onClose} className="flex justify-end">
-               <Close size="lg" />
-             </div>
-             <div className="flex justify-center text-3xl font-bold">
-               Add Content
-             </div>
-             <div className=" pt-7">
-               <div className=" flex justify-center">
+        <div className="fixed inset-0 z-50 font-poppins flex items-center justify-center bg-black/30 backdrop-blur-sm">
+          <div className="relative sm:w-full w-80 max-w-md bg-white rounded-xl shadow-2xl border border-gray-100 p-8 transform transition-all duration-300 ease-in-out">
+            <button
+              onClick={onClose}
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors duration-200 rounded-full p-1 hover:bg-gray-100"
+            >
+              <X size={24} />
+            </button>
 
+            <div className="flex justify-center text-3xl font-bold">
+              Add Content
+            </div>
+            <div className=" pt-7">
+              <div className=" flex justify-center">
                 <div>
                   <InputComp
                     width="full"
