@@ -69,7 +69,7 @@ export const SideBar = ({
           </Link>
           <Link to={"/"}>
             <p className="text-2xl font-bold dark:text-white text-gray-800">
-              CloudBrain
+              CLoudBrain
             </p>
           </Link>
         </div>

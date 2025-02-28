@@ -31,7 +31,7 @@ variantStyle.set(
 type Sizes = "sm" | "md" | "lg";
 
 const sizeStyles = new Map<Sizes, string>();
-sizeStyles.set("lg", "py-2 sm:px-5 px-4 text-sm sm:text-xl rounded-lg");
+sizeStyles.set("lg", "py-2 sm:px-5 px-4 text-sm  sm:text-xl rounded-lg");
 sizeStyles.set("md", "py-2 sm:px-4 px-2 sm:text-lg text-sm  rounded-md");
 sizeStyles.set("sm", "py-1 px-2 text-xs rounded-md");
 

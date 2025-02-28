@@ -110,14 +110,14 @@ export const LandingPage = () => {
         </div>
         <div className="flex justify-end pr-8 md:pr-16 relative -translate-y-16">
           <img
-            src="/purple-heart.png"
+            src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Purple%20Heart.png"
             alt="Purple Heart"
             className="w-8 md:w-[50px] dark:brightness-125"
           />
         </div>
         <div className="flex justify-center sm:-translate-y-32 -translate-y-28 ">
           <img
-            src="/blue-heart.png"
+            src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Blue%20Heart.png"
             alt="Blue Heart"
             className="w-8 md:w-[50px] dark:brightness-125"
           />
