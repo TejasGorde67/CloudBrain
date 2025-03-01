@@ -3,7 +3,7 @@ import { InputComp } from "./input";
 import { Button } from "./button";
 import axios from "axios";
 import { Loader } from "./loader";
-import { X, PlusCircle } from "lucide-react";
+import { X } from "lucide-react";
 import { toast } from "react-toastify";
 
 enum ContentType {
