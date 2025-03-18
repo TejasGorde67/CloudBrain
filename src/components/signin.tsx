@@ -63,7 +63,7 @@ export const SignIn = () => {
       <div className="border-gray-200 border bg-white h-custom-h shadow-md rounded-lg w-full max-w-sm p-6">
         <div className="pt-4 flex justify-center">
           <p className="w-full text-3xl  font-bold text-center">
-            Welcome to CloudBrain!
+            Welcome to Cloud Brain!
           </p>
         </div>
 
