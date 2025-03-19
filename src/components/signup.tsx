@@ -65,9 +65,34 @@ export const Signup = () => {
       toast.success("You have successfully signed up!");
       navigate("/signin");
     } catch (err) {
-      setError("Signup failed. Please try again later.");
-      toast.warning("Signup failed. Please try again later.");
-      console.error("Signup error:", err);
+      const error = err as any;
+      
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        const responseData = error.response.data as any;
+        
+        if (responseData.message) {
+          setError(responseData.message);
+          toast.warning(responseData.message);
+        } else if (error.response.status === 409) {
+          setError("Username already exists. Please choose a different username.");
+          toast.warning("Username already exists. Please choose a different username.");
+        } else {
+          setError(`Signup failed (Status: ${error.response.status}). Please try again later.`);
+          toast.warning(`Signup failed (Status: ${error.response.status}). Please try again later.`);
+        }
+      } else if (error.request) {
+        // The request was made but no response was received
+        setError("No response from server. Please check your internet connection.");
+        toast.warning("No response from server. Please check your internet connection.");
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        setError("Signup failed. Please try again later.");
+        toast.warning("Signup failed. Please try again later.");
+      }
+      
+      console.error("Signup error details:", error);
     } finally {
       setLoading(false);
     }
