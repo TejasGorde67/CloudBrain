@@ -39,6 +39,14 @@ export const Signup = () => {
     if (savedMode === "true") {
       setIsDarkMode(true);
       document.documentElement.classList.add("dark");
+    } else if (savedMode === "false") {
+      setIsDarkMode(false);
+      document.documentElement.classList.remove("dark");
+    } else {
+      // If no preference is saved, check if the home page has dark mode applied
+      const isDarkModeApplied = document.documentElement.classList.contains("dark");
+      setIsDarkMode(isDarkModeApplied);
+      localStorage.setItem("darkMode", isDarkModeApplied.toString());
     }
   }, []);
 
@@ -46,13 +54,22 @@ export const Signup = () => {
   const toggleDarkMode = () => {
     const newMode = !isDarkMode;
     setIsDarkMode(newMode);
+    
+    // Save to localStorage so other pages (including home) can access it
     localStorage.setItem("darkMode", newMode.toString());
     
+    // Apply dark mode to document for immediate effect
     if (newMode) {
       document.documentElement.classList.add("dark");
     } else {
       document.documentElement.classList.remove("dark");
     }
+    
+    // Dispatch a custom event that the home page can listen for
+    const darkModeEvent = new CustomEvent('darkModeChanged', { 
+      detail: { isDarkMode: newMode } 
+    });
+    window.dispatchEvent(darkModeEvent);
   };
 
   const handleToggle = () => {
