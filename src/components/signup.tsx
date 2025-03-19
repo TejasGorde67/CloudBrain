@@ -140,19 +140,19 @@ export const Signup = () => {
 
   return (
     <div className={`flex pt-24 font-poppins justify-center ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-white'} min-h-screen p-8 bg-pattern`}>
-      <div className={`border-gray-200 border ${isDarkMode ? 'bg-gray-800' : 'bg-white'} h-custom-h shadow-md rounded-lg w-full max-w-sm p-6`}>
-        <div className="flex justify-between items-center">
-          <div className="pt-4 flex-grow">
-            <p className="w-full text-3xl font-bold text-center">
-              Sign Up and Sync Your Ideas!
-            </p>
-          </div>
-          <button 
-            onClick={toggleDarkMode} 
-            className={`p-2 rounded-full ${isDarkMode ? 'bg-gray-700 text-yellow-300' : 'bg-gray-200 text-gray-700'}`}
-          >
-            {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
-          </button>
+      <div className={`relative border-gray-200 border ${isDarkMode ? 'bg-gray-800' : 'bg-white'} h-custom-h shadow-md rounded-lg w-full max-w-sm p-6`}>
+        {/* Dark mode toggle button in top right corner */}
+        <button 
+          onClick={toggleDarkMode} 
+          className={`absolute top-3 right-3 p-2 rounded-full ${isDarkMode ? 'bg-gray-700 text-yellow-300' : 'bg-gray-200 text-gray-700'}`}
+        >
+          {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
+        </button>
+        
+        <div className="pt-4 flex justify-center">
+          <p className="w-full text-3xl font-bold text-center">
+            Sign Up and Sync Your Ideas!
+          </p>
         </div>
 
         <div className="pt-5 flex justify-center">
