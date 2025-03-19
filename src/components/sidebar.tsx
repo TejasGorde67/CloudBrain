@@ -20,9 +20,21 @@ export const SideBar = ({
 }) => {
   const { content } = useContent();
   const [selectedContent, setSelectedContent] = useState<string | null>(null);
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(true); // Set default to true for dark mode
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const sidebarRef = useRef<HTMLDivElement>(null);
+
+  // Check for saved dark mode preference on mount
+  useEffect(() => {
+    const savedMode = localStorage.getItem("darkMode");
+    if (savedMode === "true" || savedMode === null) { // Default to dark if not set
+      setIsDarkMode(true);
+      document.documentElement.classList.add("dark");
+    } else {
+      setIsDarkMode(false);
+      document.documentElement.classList.remove("dark");
+    }
+  }, []);
 
   const handleContentSelection = (contentType: string | null) => {
     setSelectedContent(contentType);
@@ -30,8 +42,15 @@ export const SideBar = ({
   };
 
   const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-    document.querySelector("html")?.classList.toggle("dark");
+    const newMode = !isDarkMode;
+    setIsDarkMode(newMode);
+    localStorage.setItem("darkMode", newMode.toString());
+    
+    if (newMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
   };
 
   useEffect(() => {
@@ -52,29 +71,29 @@ export const SideBar = ({
     <div className={`flex font-poppins ${isDarkMode ? "dark" : ""}`}>
       <button
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        className="sm:hidden fixed top-4 left-4 z-50 p-2 rounded-lg bg-gray-200 dark:bg-gray-700"
+        className="sm:hidden fixed top-4 left-4 z-50 p-2 rounded-lg bg-gray-200 dark:bg-gray-700 dark:text-white"
       >
         {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
       </button>
 
       <div
         ref={sidebarRef}
-        className={`fixed sm:relative transition-all duration-300 dark:bg-[#1A1E24] dark:text-gray-200 bg-[#F5F7FA] border-r dark:border-gray-800 border-gray-200 shadow-lg sm:w-80 min-h-screen z-40
+        className={`fixed sm:relative transition-all duration-300 dark:bg-[#171B23] dark:text-gray-200 bg-[#F5F7FA] border-r dark:border-gray-800 border-gray-200 shadow-lg sm:w-80 min-h-screen z-40
           ${
             isMobileMenuOpen ? "w-64 left-0" : "w-0 -left-64"
           } sm:w-80 sm:left-0`}
       >
-        <div className="flex items-center justify-center space-x-3 pt-6 pb-4">
+        <div className="flex items-center justify-center space-x-3 pt-8 pb-6">
           <Link to={"/"}>
             <MainLogo src="/brain.png" size={40} />
           </Link>
           <Link to={"/"}>
-            <p className="text-2xl font-bold dark:text-white text-gray-800">
+            <p className="text-2xl font-bold dark:text-white text-gray-800 bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent">
               CloudBrain
             </p>
           </Link>
         </div>
-        <div className="mt-6">
+        <div className="mt-8 px-2">
           <SideItems onItemClick={handleContentSelection} />
         </div>
       </div>
@@ -86,7 +105,7 @@ export const SideBar = ({
         />
       )}
 
-      <div className="bg-white dark:bg-[#0D1117] dark:text-gray-300 w-full">
+      <div className="bg-white dark:bg-[#0D1117] dark:text-gray-300 w-full min-h-screen">
         <div className="flex flex-col sm:flex-row justify-between items-center mt-8 px-6">
           <p className="font-bold text-3xl sm:text-2xl text-gray-800 dark:text-white mb-4 sm:mb-0">
             All Notes
@@ -94,10 +113,10 @@ export const SideBar = ({
           <div className="flex items-center space-x-4">
             <button
               onClick={toggleDarkMode}
-              className=" hidden sm:block p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+              className="hidden sm:flex p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
             >
               {isDarkMode ? (
-                <Sun className="text-yellow-500" size={20} />
+                <Sun className="text-yellow-400" size={20} />
               ) : (
                 <Moon className="text-gray-600" size={20} />
               )}
