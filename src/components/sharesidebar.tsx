@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import logo from "../assets/brain.png";
+import logo from "/brain.png";
 import { MainLogo } from "./logo";
 import { Moon, Sun } from "lucide-react";
 import { SideItems } from "./sideitems";
@@ -56,9 +56,7 @@ const SharedContent = () => {
           <div className="mt-5">
             <MainLogo src={logo} size={40} />
           </div>
-          <p className="text-2xl  mt-6 ml-3 font-bold">
-            CloudBrain
-          </p>
+          <p className="text-2xl  mt-6 ml-3 font-bold">CloudBrain</p>
         </div>
         <div className="mt-7">
           <SideItems onItemClick={handleContentSelection} />
@@ -69,16 +67,16 @@ const SharedContent = () => {
           <p className="flex items-center  font-bold ml-10 text-2xl">
             {`${name}'s Brain`}
           </p>
-          <button 
-              onClick={toggleDarkMode} 
-              className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
-            >
-              {isDarkMode ? (
-                <Sun className="text-yellow-500" size={20} />
-              ) : (
-                <Moon className="text-gray-600" size={20} />
-              )}
-            </button>
+          <button
+            onClick={toggleDarkMode}
+            className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+          >
+            {isDarkMode ? (
+              <Sun className="text-yellow-500" size={20} />
+            ) : (
+              <Moon className="text-gray-600" size={20} />
+            )}
+          </button>
 
           <div className="flex mr-6">
             <div className="mr-4"></div>

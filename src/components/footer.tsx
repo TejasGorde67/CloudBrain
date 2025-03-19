@@ -1,4 +1,4 @@
-import logo from "../assets/brain.png";
+import logo from "/brain.png";
 import gitlogo from "../assets/github.png";
 import xlogo from "../assets/twitter.png";
 import inlogo from "../assets/linkedin.png";

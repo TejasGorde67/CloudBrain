@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Link as ScrollLink } from "react-scroll";
 import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
-import logo from "../assets/brain.png";
+import logo from "/brain.png";
 import { Button } from "./button";
 import { Moon, Sun } from "lucide-react";
 
@@ -20,31 +20,31 @@ export const LandingPage = () => {
       setIsDarkMode(false);
       document.documentElement.classList.remove("dark");
     }
-    
+
     // Listen for dark mode changes from other components
     const handleDarkModeChange = (event: any) => {
       setIsDarkMode(event.detail.isDarkMode);
     };
-    
-    window.addEventListener('darkModeChanged', handleDarkModeChange);
-    
+
+    window.addEventListener("darkModeChanged", handleDarkModeChange);
+
     // Clean up event listener on unmount
     return () => {
-      window.removeEventListener('darkModeChanged', handleDarkModeChange);
+      window.removeEventListener("darkModeChanged", handleDarkModeChange);
     };
   }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-  
+
   const toggleDarkMode = () => {
     const newMode = !isDarkMode;
     setIsDarkMode(newMode);
-    
+
     // Save to localStorage so other pages can access it
     localStorage.setItem("darkMode", newMode.toString());
-    
+
     // Apply dark mode to document
     if (newMode) {
       document.documentElement.classList.add("dark");

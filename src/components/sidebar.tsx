@@ -1,9 +1,10 @@
+// Remove this import
+// import logo from "../assets/brain.png";
 import { useState, useEffect, useRef } from "react";
 import { Button } from "./button";
 import { Plus } from "../icons/plus";
 import { Share } from "../icons/share";
 import { Menu, Moon, Sun, X } from "lucide-react";
-import logo from "../assets/brain.png";
 import { MainLogo } from "./logo";
 import { Card } from "./cards";
 import { SideItems } from "./sideitems";
@@ -65,7 +66,7 @@ export const SideBar = ({
       >
         <div className="flex items-center justify-center space-x-3 pt-6 pb-4">
           <Link to={"/"}>
-            <MainLogo src={logo} size={40} />
+            <MainLogo src="/brain.png" size={40} />
           </Link>
           <Link to={"/"}>
             <p className="text-2xl font-bold dark:text-white text-gray-800">
