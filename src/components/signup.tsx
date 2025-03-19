@@ -1,11 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "./button";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import axios from "axios";
 import { Loader } from "./loader";
 import { AuthInputcomp } from "./authinput";
 import { z } from "zod";
-import { EyeOff, Eye } from "lucide-react";
+import { EyeOff, Eye, Moon, Sun } from "lucide-react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -31,6 +31,29 @@ export const Signup = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [type, setType] = useState("password");
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  // Check for saved dark mode preference on component mount
+  useEffect(() => {
+    const savedMode = localStorage.getItem("darkMode");
+    if (savedMode === "true") {
+      setIsDarkMode(true);
+      document.documentElement.classList.add("dark");
+    }
+  }, []);
+
+  // Toggle dark mode
+  const toggleDarkMode = () => {
+    const newMode = !isDarkMode;
+    setIsDarkMode(newMode);
+    localStorage.setItem("darkMode", newMode.toString());
+    
+    if (newMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  };
 
   const handleToggle = () => {
     if (type === "password") {
@@ -99,12 +122,20 @@ export const Signup = () => {
   };
 
   return (
-    <div className="flex pt-24 font-poppins justify-center bg-white min-h-screen p-8 bg-pattern">
-      <div className="border-gray-200 border bg-white h-custom-h shadow-md rounded-lg w-full max-w-sm p-6">
-        <div className="pt-4 flex justify-center">
-          <p className="w-full text-3xl font-bold text-center">
-            Sign Up and Sync Your Ideas!
-          </p>
+    <div className={`flex pt-24 font-poppins justify-center ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-white'} min-h-screen p-8 bg-pattern`}>
+      <div className={`border-gray-200 border ${isDarkMode ? 'bg-gray-800' : 'bg-white'} h-custom-h shadow-md rounded-lg w-full max-w-sm p-6`}>
+        <div className="flex justify-between items-center">
+          <div className="pt-4 flex-grow">
+            <p className="w-full text-3xl font-bold text-center">
+              Sign Up and Sync Your Ideas!
+            </p>
+          </div>
+          <button 
+            onClick={toggleDarkMode} 
+            className={`p-2 rounded-full ${isDarkMode ? 'bg-gray-700 text-yellow-300' : 'bg-gray-200 text-gray-700'}`}
+          >
+            {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
+          </button>
         </div>
 
         <div className="pt-5 flex justify-center">
@@ -119,7 +150,7 @@ export const Signup = () => {
           />
           <button
             onClick={handleToggle}
-            className="absolute right-4 top-1/2 transform translate-y-1  sm:translate-x-6 translate-x-9"
+            className="absolute right-4 top-1/2 transform translate-y-1 sm:translate-x-6 translate-x-9"
           >
             {type === "password" ? <EyeOff size={20} /> : <Eye size={20} />}
           </button>
@@ -144,9 +175,9 @@ export const Signup = () => {
         </div>
 
         <div className="pt-4 flex justify-center">
-          <p className="text-sm text-gray-500 text-center">
+          <p className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-500'} text-center`}>
             Already a member?{" "}
-            <span className="text-[#414D5D] cursor-pointer">
+            <span className={`${isDarkMode ? 'text-blue-400' : 'text-[#414D5D]'} cursor-pointer`}>
               <Link to="/signin">
                 <button>Sign In</button>
               </Link>
@@ -154,9 +185,9 @@ export const Signup = () => {
           </p>
         </div>
         <div className="pt-4 flex justify-center">
-          <p className="text-sm text-gray-500 text-center">
+          <p className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-500'} text-center`}>
             Before registering, read and agree with our{" "}
-            <span className="text-[#414D5D]">
+            <span className={`${isDarkMode ? 'text-blue-400' : 'text-[#414D5D]'}`}>
               Terms of Service and Privacy Policy
             </span>
           </p>
